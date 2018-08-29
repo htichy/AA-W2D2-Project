@@ -1,11 +1,11 @@
-require_relative 'piece'
-require_relative 'display'
+# require_relative 'piece'
 
 class Board
+  attr_accessor :grid
   
   def initialize
-    @grid = Array.new(8){Array.new(8, @piece)}
-    @grid[4][4] = Piece.new
+    @grid = Array.new(8){Array.new(8, "p")}
+    # @grid[4][4] = Piece.new
   end
   
   def move_piece(start_pos, end_pos)

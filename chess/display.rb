@@ -1,6 +1,7 @@
 require 'colorize'
 require_relative 'cursor'
 require_relative 'board.rb'
+require 'byebug'
 
 class Display
   attr_reader :grid
@@ -11,18 +12,23 @@ class Display
   end
   
   def render
-    @grid.each do |row, i|
-      row.each do |cell, j|
-        if cursor.cursor_pos = [i, j]
-          puts cell.val.colorize(:red)
+    @grid.grid.each_with_index do |row, i|  
+      puts "------------------"
+      row.each_with_index do |cell, j|
+        if @cursor.cursor_pos == [i, j]
+          print "|#{cell.colorize(:red)}"
         else
-          puts cell.val
+          print "|#{cell.colorize(:blue)}"
         end
       end
+      print "|\n"
     end
+    puts "------------------"
   end
 end
 
 if __FILE__ == $PROGRAM_NAME
-  render
+  b = Board.new
+  d = Display.new(b)
+  d.render
 end
